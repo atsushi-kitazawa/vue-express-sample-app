@@ -1,7 +1,8 @@
+const e = require('express');
 var express = require('express');
 var router = express.Router();
 const { Sequelize, Model, DataTypes } = require('sequelize')
-const sequelize = new Sequelize('postgres://postgres:mysecretpassword@172.25.200.14:15432/express_db')
+const sequelize = new Sequelize('postgres://postgres:mysecretpassword@172.25.199.119:15432/express_db')
 
 var fn1 = function (req, res, next) {
   sequelize.sync();
@@ -41,6 +42,39 @@ router.post('/', function (req, res, next) {
     });
   }).catch(err => {
     res.status(500).send('Error: ' + err);
+  })
+})
+
+router.put('/:userId', function (req, res, next) {
+  sequelize.sync();
+  Account.update({
+    name: req.body.name
+  }, {
+    where: {
+      id: req.params.userId
+    }
+  }).then(result => {
+    res.status(200).json({
+      id: req.params.userId,
+      name: req.body.name
+    }).catch(err => {
+      res.status(500).send('Error: ' + err);
+    })
+  })
+})
+
+router.delete('/:userId', function (req, res, next) {
+  sequelize.sync();
+  Account.destroy({
+    where: {
+      id: req.params.userId
+    }
+  }).then(result => {
+    res.status(200).json({
+      id: req.params.userId
+    }).catch(err => {
+      res.status(500).send('Error: ' + err);
+    })
   })
 })
 

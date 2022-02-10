@@ -1,0 +1,5 @@
+curl http://localhost:3000/users | jq
+curl http://localhost:3000/users/1 | jq
+curl -X POST http://localhost:3000/users -H 'Content-Type: application/json' -d '{"id":4,"name":"hoge"}' | jq
+curl -X PUT http://localhost:3000/users/1 -H 'Content-Type: application/json' -d '{"name":"change_name"}' | jq
+curl -X DELETE http://localhost:3000/users/4 | jq
