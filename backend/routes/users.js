@@ -1,11 +1,11 @@
 const e = require('express');
 var express = require('express');
 var router = express.Router();
-const { Sequelize, Model, DataTypes } = require('sequelize')
-const sequelize = new Sequelize('postgres://postgres:mysecretpassword@172.25.199.119:15432/express_db')
+const db = require('../models')
+const Account = db.account
 
 var fn1 = function (req, res, next) {
-  sequelize.sync();
+  db.sequelize.sync();
   Account.findAll().then(result => {
     res.status(200).json(result);
   }).catch(err => {
@@ -18,7 +18,7 @@ var fn1 = function (req, res, next) {
 router.get('/', [fn1]);
 
 router.get('/:userId', function (req, res, next) {
-  sequelize.sync();
+  db.sequelize.sync();
   Account.findByPk(req.params.userId).then(result => {
     if (result != null) {
       res.status(200).json(result);
@@ -31,7 +31,7 @@ router.get('/:userId', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-  sequelize.sync();
+  db.sequelize.sync();
   Account.create({
     id: req.body.id,
     name: req.body.name
@@ -46,7 +46,7 @@ router.post('/', function (req, res, next) {
 })
 
 router.put('/:userId', function (req, res, next) {
-  sequelize.sync();
+  db.sequelize.sync();
   Account.update({
     name: req.body.name
   }, {
@@ -64,7 +64,7 @@ router.put('/:userId', function (req, res, next) {
 })
 
 router.delete('/:userId', function (req, res, next) {
-  sequelize.sync();
+  db.sequelize.sync();
   Account.destroy({
     where: {
       id: req.params.userId
@@ -77,20 +77,5 @@ router.delete('/:userId', function (req, res, next) {
     })
   })
 })
-
-const Account = sequelize.define('account', {
-  id: {
-    type: DataTypes.INTEGER,
-    field: 'id',
-    primaryKey: true
-  },
-  name: {
-    type: DataTypes.STRING,
-    field: 'name'
-  }
-}, {
-  freezeTableName: true,
-  timestamps: false
-});
 
 module.exports = router;
