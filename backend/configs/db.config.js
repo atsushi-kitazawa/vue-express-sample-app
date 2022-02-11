@@ -1,6 +1,6 @@
 module.exports = {
-    HOST: "172.25.199.119",
-    PORT: 15432,
+    HOST: process.env.IP_ADDRESS || "localhost",
+    PORT: process.env.POSTGRES_PORT || 15432,
     USER: "postgres",
     PASSWORD: "mysecretpassword",
     DB: "express_db",
