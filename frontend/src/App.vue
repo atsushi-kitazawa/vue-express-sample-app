@@ -1,26 +1,48 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <sidebar-menu :menu="menu" />
+    <div class="header">
+      <div class="container">
+        <h1>Header</h1>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  data() {
+    return {
+      menu: [
+        {
+          header: "Vue Express Sample App",
+          hiddenOnCollapse: true,
+        },
+        {
+          href: "/",
+          title: "Index",
+          icon: "fa fa-user",
+        },
+        {
+          href: "/user",
+          title: "User",
+          icon: "fa fa-chart-area",
+        },
+      ],
+    };
+  },
+  collapsed: false,
+  themes: [
+    {
+      name: "Default theme",
+      input: "",
+    },
+    {
+      name: "White theme",
+      input: "white-theme",
+    },
+  ],
+  selectedTheme: "white-theme",
+  isOnMobile: false,
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
