@@ -2,10 +2,10 @@ const e = require('express');
 var express = require('express');
 var router = express.Router();
 const db = require('../models')
+db.sequelize.sync();
 const Account = db.account
 
 var fn1 = function (req, res, next) {
-  db.sequelize.sync();
   Account.findAll().then(result => {
     res.status(200).json(result);
   }).catch(err => {
@@ -18,7 +18,6 @@ var fn1 = function (req, res, next) {
 router.get('/', [fn1]);
 
 router.get('/:userId', function (req, res, next) {
-  db.sequelize.sync();
   Account.findByPk(req.params.userId).then(result => {
     if (result != null) {
       res.status(200).json(result);
@@ -31,7 +30,6 @@ router.get('/:userId', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-  db.sequelize.sync();
   Account.create({
     id: req.body.id,
     name: req.body.name
@@ -46,7 +44,6 @@ router.post('/', function (req, res, next) {
 })
 
 router.put('/:userId', function (req, res, next) {
-  db.sequelize.sync();
   Account.update({
     name: req.body.name
   }, {
@@ -64,7 +61,6 @@ router.put('/:userId', function (req, res, next) {
 })
 
 router.delete('/:userId', function (req, res, next) {
-  db.sequelize.sync();
   Account.destroy({
     where: {
       id: req.params.userId
