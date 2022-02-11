@@ -2,8 +2,8 @@ const e = require('express');
 var express = require('express');
 const db = require('../models');
 const controller = require('../controllers/user_controller.js');
+
 var router = express.Router();
-const Account = db.account
 db.sequelize.sync();
 
 router.get('/', controller.findAll);
