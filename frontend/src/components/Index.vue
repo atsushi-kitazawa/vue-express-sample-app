@@ -21,11 +21,24 @@ export default {
     },
     transition() {
       // this.$router.push("/user")
-      var data = {
-        key1: "val1",
-        key2: "val2"
-      }
-      this.$router.push({ name: "RouterPush", params: { a: JSON.stringify(data) } });
+      var data = [
+        {
+          key: "key1",
+          val: "val1",
+        },
+        {
+          key: "key2",
+          val: "val2",
+        },
+        {
+          key: "key3",
+          val: "val3",
+        },
+      ];
+      this.$router.push({
+        name: "RouterPush",
+        params: { testJson: JSON.stringify(data) },
+      });
     },
   },
 };
