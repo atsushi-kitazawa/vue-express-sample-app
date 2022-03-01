@@ -6,6 +6,7 @@ import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 
 import Index from './components/Index.vue'
 import User from './components/User.vue'
+import RouterPush from './components/RouterPush.vue'
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -19,6 +20,12 @@ const router = createRouter({
             path: '/user',
             name: 'UserTop',
             component: User
+        },
+        {
+            path: '/push',
+            name: 'RouterPush',
+            component: RouterPush,
+            props: true
         }
     ]
 })

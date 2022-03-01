@@ -1,11 +1,14 @@
 <template>
-  <div>
-    <sidebar-menu :menu="menu" />
-    <div class="header">
-      <div class="container">
-        <h1>Header</h1>
-      </div>
-    </div>
+  <div id="panel">
+    <sidebar-menu
+      :collapsed="collapsed"
+      :menu="menu"
+      :theme="selectedTheme"
+      :show-one-child="true"
+      @collapse="onCollapse"
+      @itemClick="onItemClick"
+    ></sidebar-menu>
+    <router-view/>
   </div>
 </template>
 
@@ -46,3 +49,10 @@ export default {
   isOnMobile: false,
 };
 </script>
+
+<style>
+.header {
+  font-size: 50px;
+  margin-left: 300px;
+}
+</style>
