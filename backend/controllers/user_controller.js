@@ -1,5 +1,5 @@
-const db = require('../models')
-const Account = db.account
+const model = require('../models')
+const Account = model.db.account
 
 exports.findAll = (req, res) => {
     Account.findAll().then(result => {

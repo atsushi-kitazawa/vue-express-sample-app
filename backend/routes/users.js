@@ -1,10 +1,10 @@
 const e = require('express');
 var express = require('express');
-const db = require('../models');
+const model = require('../models');
 const controller = require('../controllers/user_controller.js');
 
 var router = express.Router();
-db.sequelize.sync();
+model.db.sequelize.sync();
 
 router.get('/', controller.findAll);
 router.get('/:userId', controller.findByPk);
