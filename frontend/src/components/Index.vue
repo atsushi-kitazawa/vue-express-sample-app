@@ -5,6 +5,9 @@
     <input type="button" @click="increment" value="test" />
     <br />
     <input type="button" @click="transition" value="router push" />
+    <br />
+    <input v-model="isAdmin" />
+    <input type="button" @click="gotoAdmin" value="isAdmin">
   </div>
 </template>
 
@@ -13,6 +16,7 @@ export default {
   data() {
     return {
       count: 0,
+      isAdmin: "",
     };
   },
   methods: {
@@ -20,7 +24,6 @@ export default {
       this.count++;
     },
     transition() {
-      // this.$router.push("/user")
       var data = [
         {
           key: "key1",
@@ -39,6 +42,10 @@ export default {
         name: "RouterPush",
         params: { testJson: JSON.stringify(data) },
       });
+    },
+    gotoAdmin() {
+      sessionStorage.setItem("isAdmin", this.isAdmin)
+      this.$router.push({name: "Admin"})
     },
   },
 };

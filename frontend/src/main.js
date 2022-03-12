@@ -7,6 +7,7 @@ import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 import Index from './components/Index.vue'
 import User from './components/User.vue'
 import RouterPush from './components/RouterPush.vue'
+import Admin from './components/Admin.vue'
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -26,6 +27,11 @@ const router = createRouter({
             name: 'RouterPush',
             component: RouterPush,
             props: true
+        },
+        {
+            path: '/admin',
+            name: 'Admin',
+            component: Admin,
         }
     ]
 })
