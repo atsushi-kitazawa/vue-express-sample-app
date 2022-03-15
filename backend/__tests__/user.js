@@ -1,6 +1,6 @@
 const request = require("supertest")
 const app = require("../app")
-const dbConfig = require('../configs/db.config.js')[process.env.NODE_ENV || 'development']
+const dbConfig = require('../configs/db.config.js')['mysql'][process.env.NODE_ENV || 'test']
 var { Client } = require('pg');
 
 var client = new Client({
