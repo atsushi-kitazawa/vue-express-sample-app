@@ -1,6 +1,6 @@
 const request = require("supertest")
 const app = require("../app")
-const dbConfig = require('../configs/db.config.js')['mysql'][process.env.NODE_ENV || 'test']
+const dbConfig = require('../configs/db.config.js')['postgres'][process.env.NODE_ENV || 'test']
 var { Client } = require('pg');
 
 var client = new Client({
@@ -17,21 +17,27 @@ const expect_users = [
 ]
 
 beforeAll(() => {
-  client.connect();
-  client.query('create table account (id integer primary key, name varchar(50))')
-  client.query({
-    text: 'insert into account values($1, $2)',
-    values: [1, 'aaa']
-  })
-  client.query({
-    text: 'insert into account values($1, $2)',
-    values: [2, 'bbb']
+  new Promise(resolve => {
+    client.connect();
+    client.query('create table account (id integer primary key, name varchar(50))')
+    client.query({
+      text: 'insert into account values($1, $2)',
+      values: [1, 'aaa']
+    })
+    client.query({
+      text: 'insert into account values($1, $2)',
+      values: [2, 'bbb']
+    })
+    resolve()
   })
 })
 
-afterAll(async () => {
-  client.query('drop table account')
-  client.end();
+afterAll(() => {
+  new Promise(resolve => {
+    client.query('drop table account')
+    client.end();
+    resolve()
+  })
 })
 
 describe("Test get user list", () => {
