@@ -8,7 +8,7 @@
       @collapse="onCollapse"
       @itemClick="onItemClick"
     ></sidebar-menu>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -27,7 +27,9 @@ export default {
           icon: "fa fa-user",
         },
         {
-          href: "/user",
+          href: {
+            name: "User",
+          },
           title: "User",
           icon: "fa fa-chart-area",
         },

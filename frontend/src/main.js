@@ -19,7 +19,7 @@ const router = createRouter({
         },
         {
             path: '/user',
-            name: 'UserTop',
+            name: 'User',
             component: User
         },
         {
